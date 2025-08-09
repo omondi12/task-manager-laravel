@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -45,4 +46,30 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Add these methods to your existing User model (app/Models/User.php)
+// Add them inside the class, after the existing methods
+
+/**
+ * Get the tasks for the user.
+ */
+public function tasks(): HasMany
+{
+    return $this->hasMany(Task::class);
+}
+
+/**
+ * Get the categories for the user.
+ */
+public function categories(): HasMany
+{
+    return $this->hasMany(Category::class);
+}
+
+public function sendPasswordResetNotification($token)
+{
+    $this->notify(new \App\Notifications\CustomResetPasswordNotification($token));
+}
+
+
 }
