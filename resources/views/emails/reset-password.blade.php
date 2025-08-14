@@ -34,7 +34,7 @@
         .button { 
             display: inline-block; 
             background: #4f46e5; 
-            color: white; 
+            color: yellow; 
             padding: 12px 30px; 
             text-decoration: none; 
             border-radius: 5px; 
